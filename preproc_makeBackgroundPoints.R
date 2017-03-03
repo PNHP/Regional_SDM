@@ -6,7 +6,7 @@ library(rgdal)
 
 ## set paths ----
 # This is the directory that has your study area polygon.
-setwd("E:/Reg5Modeling_Project/other_spatial")
+setwd("K:/Reg5Modeling_Project/other_spatial")
 
 
 # the name of the study area polygon
@@ -38,13 +38,13 @@ grtsResult <- grts(design=dsgn,
 			in.shape=layer,
 			att.frame=att.pt,
 			type.frame="area",
-			DesignID="bkgrndRanPts",
+			DesignID="BG",
 			prjfilename=layer,
 			out.shape=nm.RanPtFile)
 			
 # remove extranneous fields, write it out ----
 ranPts <- as(grtsResult, "SpatialPointsDataFrame")
-colsToKeep <- c("stratum")
+colsToKeep <- c("siteID")
 ranPts <- ranPts[,colsToKeep]
 
 # apply projection info
