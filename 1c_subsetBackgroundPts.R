@@ -7,42 +7,36 @@ library(sp)
 library(rgeos)
 
 # set up paths ----
-### This is the location and shapefile that has your species polygon data. 
-polydir <- "D:/RegionalSDM/inputs/species/glypmuhl/polygon_data"
-polyFileName <- "glypmuhl_expl.shp"
-setwd(polydir)
-
 ### This is the background random points shapefile info
-ranptsFolder <- "D:/RegionalSDM/inputs/background"
-ranptsShp <- "clpBnd_SDM_att"
+ranptsFolder <- "K:/Reg5Modeling_Project/inputs/background"
+ranptsShp <- "sdmclpbnd_20160831_buffNeg1000_RanPts_clean"
 
 # load data ----
-# get the poly shapefile
-shpName <- strsplit(polyFileName,"\\.")[[1]][[1]]
-polyShapef <- readOGR(dsn=polydir, layer = shpName) #Z-dimension discarded msg is OK
-
 # get the background shapefile
 backgShapef <- readOGR(dsn=ranptsFolder, layer=ranptsShp)
 
 #get projection info for later
 projInfo <- backgShapef@proj4string
 
-# find coincident points ----
-#buffer the poly shapefile 30 m
-polybuff <- gBuffer(polyShapef, width = 30)
+# random subset ----
+# how many background points do we want?
+desiredBG <- 1000
 
-# find points that fall within the buffered polygons, subset the sp object
-coincidentPts <- gContains(polybuff, backgShapef, byid = TRUE)
-colnames(coincidentPts) <- "insideBuff"
-backgShapef@data <- cbind(backgShapef@data, coincidentPts)
-backgSubset <- backgShapef[backgShapef@data$insideBuff == FALSE,]
+# these points are already spatially-balanced, per GRTS
+# so to maintain this, we actually draw *in order*, based 
+# on the siteID column
+# Data are already sorted but to be absolutely sure, sort 'em
+backgShapef <- backgShapef[order(backgShapef$siteID),]
+
+# get the subset
+BG.subset <- backgShapef[1:desiredBG,]
 
 # projection info doesn't stick, apply from what we grabbed earlier
-backgSubset@proj4string <- projInfo
+BG.subset@proj4string <- projInfo
 
 # write it out ---
-outFileName <- paste(ranptsShp, "_clean", sep="")
-writeOGR(backgSubset, dsn = ranptsFolder, layer = outFileName, 
+outFileName <- paste(ranptsShp, "_subset", sep="")
+writeOGR(BG.subset, dsn = ranptsFolder, layer = outFileName, 
          driver="ESRI Shapefile", overwrite_layer=TRUE)
 
 ## clean up ----

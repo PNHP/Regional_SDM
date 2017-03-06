@@ -47,8 +47,10 @@ ranPts <- as(grtsResult, "SpatialPointsDataFrame")
 colsToKeep <- c("siteID")
 ranPts <- ranPts[,colsToKeep]
 
-# apply projection info
+# apply projection info, switch to BG folder, write it
 ranPts@proj4string <- projInfo
+ranptsFolder <- "K:/Reg5Modeling_Project/inputs/background"
+setwd(ranptsFolder)
 writeOGR(ranPts, dsn = ".", layer = nm.RanPtFile, driver="ESRI Shapefile", overwrite_layer=TRUE)
 
 ## clean up ----
