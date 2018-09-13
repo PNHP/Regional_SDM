@@ -6,10 +6,6 @@ library(rgdal)
 library(randomForest)
 library(data.table)
 
-####
-## two lines need your attention. The one directly below (loc_scripts)
-## and about line 26 where you choose which Rdata file to use
-
 # load data ----
 # get the rdata file
 setwd(loc_RDataOut)

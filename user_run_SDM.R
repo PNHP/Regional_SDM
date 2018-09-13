@@ -73,7 +73,7 @@ run_SDM(
   begin_step = "1",
   add_vars = NULL,
   remove_vars = NULL,
-  huc_level = NULL,
+  # huc_level = 2,
   prompt = FALSE
 )
 
@@ -134,7 +134,7 @@ source("helper/run_SDM.R")
 
 # pick-up a model run after step 1 (uncomment below)
 run_SDM(
- begin_step = "5",
+ begin_step = "4",
  loc_RDataOut = paste0(project_folder, "/outputs/", model_species , "/rdata"),
  model_rdata = model_rdata, # need to provide this if picking up after step 3, otherwise leave it out
  nm_aquaArea = "PA_nhdarea_wb",

@@ -15,13 +15,6 @@ library(stringr)
 # - There is lookup data in the sqlite database to link to other element information (full name, common name, etc.)
 # - the csv has at least these fields EO_ID_ST, SNAME, SCOMNAME, COMID, OBSDATE, group_id, huc12
 
-####
-#### load input reaches ----
-###
-## two lines need your attention. The one directly below (loc_scripts)
-## and about line 38 where you choose which file to use
-
-
 # set the working directory to the location of the csv of species by reaches
 setwd(loc_spReaches)
 
