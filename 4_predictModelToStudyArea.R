@@ -16,7 +16,7 @@ setwd(loc_envVars)
 EnvVars <- read.csv("EnvVars.csv", colClasses=c("huc12"="character"))
 names(EnvVars) <- tolower(names(EnvVars))
 
-if (!is.null(huc_level)) {
+if (exists("huc_level")) {
   # subset to huc if requested
   EnvVars$huc12 <- str_pad(EnvVars$huc12, 12, pad=0)
   presHUC <- str_pad(as.character(df.full$huc12[df.full$pres==1]), 12, pad = 0 )
