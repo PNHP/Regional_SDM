@@ -43,8 +43,8 @@ run_SDM <- function(
     stop("Need to begin on step 1 or 2 if adding or removing variables.")
   if (hasArg(huc_level) & begin_step != "1") 
     stop("Need to begin on step 1 if using HUC subset.")
-  if (hasArg(huc_level) & !huc_level %in% c(0,2,4,6,8,10,12))
-    stop("Valid 'huc_level' values are 0, 2, 4, 6, 8, 10, or 12.")
+  if (hasArg(huc_level) & !huc_level %in% c(2,4,6,8,10,12))
+    stop("Valid 'huc_level' values are 2, 4, 6, 8, 10, or 12.")
   
   if (begin_step != "1") {
     if (begin_step %in% c("2","3")) {

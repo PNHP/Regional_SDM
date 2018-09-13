@@ -73,7 +73,7 @@ run_SDM(
   begin_step = "1",
   add_vars = NULL,
   remove_vars = NULL,
-  huc_level = 0,
+  huc_level = NULL,
   prompt = FALSE
 )
 
