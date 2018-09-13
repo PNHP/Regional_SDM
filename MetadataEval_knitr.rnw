@@ -344,7 +344,7 @@ par(mar=c(2,2,2,2.5), #bottom, left, top, right
     cex=0.9)    #text size
 
 # set up plot based on study area extent (unless huc region defined)
-if (!is.null(huc_level)) plot(results_shape, col = NA, axes = TRUE) else
+if (exists("huc_level")) plot(results_shape, col = NA, axes = TRUE) else
   plot(spTransform(studyAreaExtent, CRSobj = results_shape@proj4string), col = NA, border = NA, axes = TRUE)
 
 if (!is.null(nm_aquaArea)) {
