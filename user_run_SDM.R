@@ -73,7 +73,6 @@ run_SDM(
   begin_step = "1",
   add_vars = NULL,
   remove_vars = NULL,
-  # huc_level = 2,
   prompt = FALSE
 )
 
@@ -99,18 +98,11 @@ run_SDM(
 # that was specified for the original model run. 
 
 # same prep steps as above
-library(RSQLite)
-db <- dbConnect(SQLite(),dbname="E:/SDM/Aquatic/databases/SDM_lookupAndTracking_new.sqlite")
-biglist <- dbGetQuery(db, "SELECT code from lkpSpecies where modtype = 'A';")$CODE
-biglist <- biglist[!biglist %in% c("lampradi")]
-for (ms in biglist) {
-print(ms)
+
 # set project folder and species code for this run
 project_folder <- "E:/SDM/Aquatic"
-model_species <- ms
 # set model rdata, if starting at step 4 or later
- model_rdata <- "alasvari_20180207_124154"
-
+model_rdata <- "lasmcoml_20180913_182831"
 # path where you want to save model run scripts
 loc_scripts <- paste0(project_folder, "/inputs/species/", model_species ,"/scripts")
 # github branch to download
@@ -119,7 +111,6 @@ branch <- "aqua_chris"
 # this downloads latest scripts from GitHub (you can save the 'get_scripts.R' 
 # file anywhere on your computer, so you don't have to change the path)
 source("E:/SDM/Aquatic/scripts/Regional_SDM/helper/get_scripts.R", local = TRUE)
-
 # NOTE any messages, and download/place scripts manually if necessary
 
 # manually set loc_scripts here if running step 1 seperately from step 2 (on different computers)
@@ -139,8 +130,10 @@ run_SDM(
  model_rdata = model_rdata, # need to provide this if picking up after step 3, otherwise leave it out
  nm_aquaArea = "PA_nhdarea_wb",
  nm_refBoundaries = "StatesEast",
- model_comments = "variable set <1% missing by variable. New sampling method (75% of all reaches), affects thresholds.",
+ model_comments = "",
  prompt = FALSE
 )
-}
+
+
+
 

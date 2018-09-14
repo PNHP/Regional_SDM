@@ -366,13 +366,9 @@ for (i in 1:nclr) {
   plot(sub, col=sub$colcode, lwd = 0.14*sub$strord, add=T)
 }
 
-plot(spTransform( referenceBoundaries[!referenceBoundaries$STATE_NAME %in% studyAreaExtent$STATE_NAME,]
-                  , CRSobj = results_shape@proj4string), add=T, border="gray50", lwd=0.3, col = "white")
-plot(spTransform( studyAreaExtent
-                  , CRSobj = results_shape@proj4string), add=T, border="black", lwd=0.7)
-#title(main="Creek Heelsplittler" ) # sub=" Equal-Width Class Intervals"
-legend("topleft", legend=names(attr(colcode, "table")),
-    col=attr(colcode, "palette"), cex=0.8, bty="o", lwd = 4, bg = "white")
+plot(spTransform(referenceBoundaries[!referenceBoundaries$STATE_NAME %in% studyAreaExtent$STATE_NAME,], CRSobj = results_shape@proj4string), add=T, border="gray50", lwd=0.3) #, col = "white"
+plot(spTransform( studyAreaExtent, CRSobj = results_shape@proj4string), add=T, border="black", lwd=0.7)
+legend("topleft", legend=names(attr(colcode, "table")), col=attr(colcode, "palette"), cex=0.8, bty="o", lwd = 4, bg = "white")
 box()
 @
 
