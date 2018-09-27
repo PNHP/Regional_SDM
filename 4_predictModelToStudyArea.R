@@ -6,6 +6,8 @@ library(rgdal)
 library(randomForest)
 library(data.table)
 
+print(paste("The HUC level is: ",huc_level,sep="" ))
+
 # load data ----
 # get the rdata file
 setwd(loc_RDataOut)
@@ -16,14 +18,16 @@ setwd(loc_envVars)
 EnvVars <- read.csv("EnvVars.csv", colClasses=c("huc12"="character"))
 names(EnvVars) <- tolower(names(EnvVars))
 
-if (exists("huc_level")) {
-  # subset to huc if requested
-  EnvVars$huc12 <- str_pad(EnvVars$huc12, 12, pad=0)
-  presHUC <- str_pad(as.character(df.full$huc12[df.full$pres==1]), 12, pad = 0 )
+# subset to huc if requested
+if (!is.null(huc_level)) {
+  EnvVars$huc12 <- str_pad(EnvVars$huc12, 12, pad=0) # the padding is just in case the leading zero is lost
+  presHUC <- str_pad(as.character(df.full$huc12[df.full$pres==1]), 12, pad=0 ) # the padding is just in case the leading zero is lost
   HUCsubset <- unique(substr(presHUC, 1, huc_level)) # subset to number of huc digits
   EnvVars <- EnvVars[substr(EnvVars$huc12,1, huc_level) %in% HUCsubset,]
 }
 EnvVars$huc12 <- NULL
+
+#write.csv("EnvVar_EXPORT4CHECKING.csv", EnvVars)
 
 # run prediction, using all rows in EnvVars with complete cases----
 df.all <- df.full

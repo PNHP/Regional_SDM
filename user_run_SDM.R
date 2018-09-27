@@ -70,10 +70,10 @@ run_SDM(
   model_comments = "",
   metaData_comments = "",
   modeller = "Christopher Tracey",
-  begin_step = "1",
+  begin_step = "2",
   add_vars = NULL,
   remove_vars = NULL,
-  prompt = FALSE
+  prompt = TRUE
 )
 
 #############################################################################
@@ -102,7 +102,7 @@ run_SDM(
 # set project folder and species code for this run
 project_folder <- "E:/SDM/Aquatic"
 # set model rdata, if starting at step 4 or later
-model_rdata <- "lasmcoml_20180913_182831"
+model_rdata <- "lasmcoml_20180914_154408"
 # path where you want to save model run scripts
 loc_scripts <- paste0(project_folder, "/inputs/species/", model_species ,"/scripts")
 # github branch to download

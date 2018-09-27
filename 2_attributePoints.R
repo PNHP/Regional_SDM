@@ -7,6 +7,9 @@ library(RSQLite)
 library(maptools)
 library(stringr)
 
+print(paste("The HUC level is: ",huc_level,sep="" ))
+
+
 # load data, QC ----
 ###
 ## two lines need your attention. The one directly below (loc_scripts)

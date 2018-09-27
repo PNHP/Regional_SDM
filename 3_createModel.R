@@ -11,6 +11,8 @@ library(vcd)     #for kappa stats
 library(abind)   #for collapsing the nested lists
 library(randomForest)
 
+print(paste("The HUC level is: ",huc_level,sep="" ))
+
 setwd(loc_spReaches)
 
 #get a list of what's in the directory

@@ -62,9 +62,11 @@ if(length(unique(substr(presReaches$huc12,1,8)))==1){
   huc_level <- 6  
 } else if(length(unique(substr(presReaches$huc12,1,4)))==1){
   huc_level <- 4  
-} else if(length(unique(substr(presReaches$huc12,1,2)))==1){
-  huc_level <- 2
+} else {
+  huc_level <- 2 # will this select all of them? 
 }
+#else if(length(unique(substr(presReaches$huc12,1,2)))==1){ #huc_level <- 2  #}
+print(paste("The HUC level is: ",huc_level,sep="" ))
 
 # set date/year column to [nearest] year, rounding when day is given
 presReaches$OBSDATE <- as.character(presReaches$OBSDATE)
@@ -142,8 +144,6 @@ testcatchments <- shapef@data
 names(testcatchments) <- tolower(names(testcatchments))
 testcatchments$huc12 <- str_pad(testcatchments$huc12, 12, pad=0)
 
-
- 
 # define project background
 if (!is.null(huc_level)) {
   # subset to huc if requested
